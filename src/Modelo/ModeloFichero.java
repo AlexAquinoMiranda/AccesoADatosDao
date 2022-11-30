@@ -28,14 +28,16 @@ public class ModeloFichero implements IModeloDao<Jugador> {
 	}
 
 	@Override
-	public Jugador get(Jugador t) {
+	public Jugador get(Jugador t) {	
 		int value = this.listaJugadores.lastIndexOf(t);
+		System.out.println(this.listaJugadores.get(value));
 		return this.listaJugadores.get(value);
 
 	}
 
 	@Override
 	public List<Jugador> list() {
+		System.out.println(this.listaJugadores.size());
 		for (Jugador a : listaJugadores) {
 			System.out.println(a.toString());
 		}
@@ -95,6 +97,8 @@ public class ModeloFichero implements IModeloDao<Jugador> {
 		try {
 			fr = new FileReader(fichero);
 			buffer = new BufferedReader(fr);
+			
+			
 			while ((texto = buffer.readLine()) != null) {
 				datos = texto.split(";");
 				this.listaJugadores

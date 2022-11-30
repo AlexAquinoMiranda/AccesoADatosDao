@@ -16,14 +16,14 @@ public class ModeloJson implements IModeloDao<Jugador> {
 
 	@Override
 	public void create(Jugador t) {
-this.listaJugadores.add(t);
+		this.listaJugadores.add(t);
 	}
 
 	@Override
 	public void delete(Jugador t) {
 		int value = this.listaJugadores.lastIndexOf(t);
 		this.listaJugadores.remove(value);
-	} 
+	}
 
 	@Override
 	public Jugador get(Jugador t) {
@@ -33,7 +33,7 @@ this.listaJugadores.add(t);
 
 	@Override
 	public List<Jugador> list() {
-		for(Jugador a : this.listaJugadores) {
+		for (Jugador a : this.listaJugadores) {
 			System.out.println(a.toString());
 		}
 		return listaJugadores;
@@ -47,21 +47,22 @@ this.listaJugadores.add(t);
 
 	@Override
 	public void save() {
-		JSONObject objeto = new JSONObject();
-		for (Jugador a : listaJugadores) {
 
-			objeto.put("nombre", a.getNombre());
-			objeto.put("apellido", a.getApellido());
-			objeto.put("dni", a.getDni());
-			objeto.put("dorsal", a.getDorsal());
-			objeto.put("equipo", a.getEquipo() );
-			
-		}
 		try {
-			PrintWriter out = new PrintWriter(
-					new FileWriter(new File(".\\resources\\FicheroJSON.json")));
-			out.write(objeto.toString());
-			out.close();
+			JSONObject objeto = new JSONObject();
+
+			for (Jugador a : listaJugadores) {
+				objeto.put("jugador",a.toString());
+//				objeto.put("nombre", a.getNombre());
+//				objeto.put("apellido", a.getApellido());
+//				objeto.put("dni", a.getDni());
+//				objeto.put("dorsal", a.getDorsal());
+//				objeto.put("equipo", a.getEquipo());
+
+				PrintWriter out = new PrintWriter(new FileWriter(new File(".\\resources\\FicheroJSON.json")), true);
+				out.write(objeto.toString());
+				out.close();
+			}
 		} catch (FileNotFoundException ex) {
 			System.err.println("error");
 		} catch (IOException ex) {
@@ -79,16 +80,16 @@ this.listaJugadores.add(t);
 			JSONObject objectJson = new JSONObject(token);
 
 			Jugador a = new Jugador();
-      for(int i=0; i<objectJson.length(); i+=5) {
-			a.setNombre((String) objectJson.get("nombre"));
-			a.setApellido((String) objectJson.get("apellido"));
-			a.setDni((String) objectJson.get("dni"));
-			a.setDorsal((int) objectJson.get("dorsal"));
-			a.setEquipo((String) objectJson.get("equipo"));
-			this.listaJugadores.add(a);
-			
+			for (int i = 0; i < objectJson.length(); i += 5) {
+				a.setNombre((String) objectJson.get("nombre"));
+				a.setApellido((String) objectJson.get("apellido"));
+				a.setDni((String) objectJson.get("dni"));
+				a.setDorsal((int) objectJson.get("dorsal"));
+				a.setEquipo((String) objectJson.get("equipo"));
+				this.listaJugadores.add(a);
+
 //                    
-      }
+			}
 
 		} catch (FileNotFoundException ex) {
 

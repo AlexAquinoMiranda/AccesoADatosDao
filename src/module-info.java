@@ -8,4 +8,5 @@
 module GestionJugadores {
 	requires java.sql;
 	requires org.json;
+	requires java.desktop;
 }

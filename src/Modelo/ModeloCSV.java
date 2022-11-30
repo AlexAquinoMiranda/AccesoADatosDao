@@ -28,6 +28,7 @@ public class ModeloCSV implements IModeloDao<Jugador> {
 	@Override
 	public Jugador get(Jugador t) {
 		int value = this.listaJugadores.lastIndexOf(t);
+		System.out.println(this.listaJugadores.get(value).toString());
 		return this.listaJugadores.get(value);
 
 	}
